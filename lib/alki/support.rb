@@ -2,6 +2,18 @@ require 'alki/support/version'
 
 module Alki
   module Support
+    def self.load_class(klass)
+      if klass.is_a?(String)
+        name = klass
+        klass = constantize classify klass
+        unless klass
+          require name
+          klass = constantize classify klass
+        end
+      end
+      klass
+    end
+
     def self.classify(str)
       str.split('/').map do |c|
         c.split('_').map{|n| n.capitalize }.join('')
