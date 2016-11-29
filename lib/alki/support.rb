@@ -5,10 +5,11 @@ module Alki
     def self.load_class(klass)
       if klass.is_a?(String)
         name = klass
-        klass = constantize classify klass
+        class_name = classify klass
+        klass = constantize class_name
         unless klass
           require name
-          klass = constantize classify klass
+          klass = constantize class_name
         end
       end
       klass
@@ -22,8 +23,8 @@ module Alki
 
     def self.constantize(name)
       name.split('::').inject(Object) do |obj,el|
-        return nil unless obj.const_defined? el
-        obj.const_get el
+        return nil unless obj.const_defined? el, false
+        obj.const_get el, false
       end
     end
 
