@@ -29,7 +29,7 @@ module Alki
     end
 
     def self.caller_path(root,caller_depth: 1)
-      path = caller_locations(caller_depth,1)[0].absolute_path
+      path = caller_locations(caller_depth+1,1)[0].absolute_path
       path_name path, root
     end
 
@@ -38,10 +38,6 @@ module Alki
       if path.start_with?(root) && path.end_with?('.rb')
         path[root.size..-4]
       end
-    end
-
-    def self.find_pkg_root(path)
-      find_root(path) {|dir| is_pkg_root? dir }
     end
 
     def self.find_root(path)
@@ -54,12 +50,6 @@ module Alki
       if dir != old_dir
         dir
       end
-    end
-
-    def self.is_pkg_root?(dir)
-      File.exists?(File.join(dir,'config','package.rb')) or
-        File.exists?(File.join(dir,'Gemfile')) or
-        !Dir.glob(File.join(dir,'*.gemspec')).empty?
     end
   end
 end
