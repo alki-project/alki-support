@@ -21,8 +21,8 @@ module Alki
       end.join('::')
     end
 
-    def self.constantize(name)
-      name.split('::').inject(Object) do |obj,el|
+    def self.constantize(name,parent = nil)
+      name.split('::').inject(parent || Object) do |obj,el|
         return nil unless obj.const_defined? el, false
         obj.const_get el, false
       end
