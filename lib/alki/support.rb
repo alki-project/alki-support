@@ -16,6 +16,19 @@ module Alki
       obj
     end
 
+    def self.create_constant(name, value, parent=nil)
+      parent ||= Object
+      *ans, ln = name.to_s.split('::')
+      ans.each do |a|
+        unless parent.const_defined? a
+          parent.const_set a, Module.new
+        end
+        parent = parent.const_get a
+      end
+
+      parent.const_set ln, value
+    end
+
     def self.classify(str)
       str.split('/').map do |c|
         c.split('_').map{|n| n.capitalize }.join('')
