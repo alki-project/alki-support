@@ -1,18 +1,19 @@
 require 'alki/support/version'
 
 module Alki
+  def self.load(name_or_obj)
+    Support.load name_or_obj
+  end
   module Support
-    def self.load_class(klass)
-      if klass.is_a?(String)
-        name = klass
-        class_name = classify klass
-        klass = constantize class_name
-        unless klass
-          require name
-          klass = constantize class_name
-        end
+    def self.load(name_or_obj)
+      if name_or_obj.is_a?(String)
+        name = name_or_obj
+        require name
+        obj = constantize classify name
+      else
+        obj = name_or_obj
       end
-      klass
+      obj
     end
 
     def self.classify(str)
