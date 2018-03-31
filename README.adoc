@@ -1,0 +1,5 @@
+= Alki::Support
+
+image:https://travis-ci.org/alki-project/alki-support.svg?branch=master["Build Status", link="https://travis-ci.org/alki-project/alki-support"]
+
+Small collection of support methods for Alki.

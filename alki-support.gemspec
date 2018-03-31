@@ -8,8 +8,9 @@ Gem::Specification.new do |spec|
   spec.email         = ["matt.edlefsen@gmail.com"]
   spec.summary       = %q{Alki support methods}
   spec.description   = %q{Various helper methods for Alki}
-  spec.homepage      = "https://github.com/medlefsen/alki-support"
+  spec.homepage      = "http://github.com/medlefsen/alki-support"
   spec.license       = "MIT"
+  spec.required_ruby_version = '>= 2.1.0'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }

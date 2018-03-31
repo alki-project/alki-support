@@ -42,11 +42,6 @@ module Alki
       end
     end
 
-    def self.caller_path(root,caller_depth: 1)
-      path = caller_locations(caller_depth+1,1)[0].absolute_path
-      path_name path, root
-    end
-
     def self.path_name(path,root=File.dirname(path))
       root = File.join(root,'')
       if path.start_with?(root) && path.end_with?('.rb')
